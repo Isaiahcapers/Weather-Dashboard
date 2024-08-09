@@ -1,11 +1,16 @@
 import dotenv from 'dotenv';
 dotenv.config();
-const API_KEY = process.env.API_KEY;
 // TODO: Define an interface for the Coordinates object
 interface Coordinates {
 // properties
-
-// methods
+  coord: {
+  lat: number;
+  lon: number;
+  }
+}
+interface StateCode {
+  statename: string;
+  stateCode: string;
 }
 // TODO: Define a class for the Weather object
 class Weather {
@@ -32,13 +37,30 @@ class Weather {
 // TODO: Complete the WeatherService class
 class WeatherService {
   // TODO: Define the baseURL, API key, and city name properties
-  baseURL: string = "https://api.openweathermap.org/data/2.5/forecast";
-  apiKey: number = API_KEY;
+  baseURL: string;
+  apiKey: number;
   cityName: string = "";
-  // TODO: Create fetchLocationData method
-  // private async fetchLocationData(query: string) {}
+
+  constructor () {
+    this.baseURL = process.env.API_BASE_URL;
+
+    this.apiKey = process.env.API_KEY;
+  }
+    // TODO: Create fetchLocationData method
+    private async fetchLocationData(query: string) {
+      try {
+        const response = await fetch(`${this.baseURL}?q=${this.cityName}&appid=${this.apiKey}`)
+        const locationData = await response.json()
+        return locationData;
+      } catch (error) {
+        console.error('An errord occured:',error);
+      }
+    }
   // TODO: Create destructureLocationData method
-  // private destructureLocationData(locationData: Coordinates): Coordinates {}
+  private destructureLocationData(locationData: Coordinates): Coordinates {
+    const { coord: { lat, lon } } = locationData;
+    return { lat, lon };
+  }
   // TODO: Create buildGeocodeQuery method
   // private buildGeocodeQuery(): string {}
   // TODO: Create buildWeatherQuery method
