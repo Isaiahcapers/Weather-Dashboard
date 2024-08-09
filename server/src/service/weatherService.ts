@@ -38,7 +38,7 @@ class Weather {
 class WeatherService {
   // TODO: Define the baseURL, API key, and city name properties
   baseURL: string;
-  apiKey: number;
+  apiKey: string;
   cityName: string = "";
 
   constructor () {
@@ -62,9 +62,14 @@ class WeatherService {
     return { lat, lon };
   }
   // TODO: Create buildGeocodeQuery method
-  // private buildGeocodeQuery(): string {}
+  private buildGeocodeQuery(city:string, state:string, country:string, limit: number, apiKey:string): string {
+    const geoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&limit=${limit}&appid=${this.apiKey}`;
+    return geoCode;
+  }
   // TODO: Create buildWeatherQuery method
-  // private buildWeatherQuery(coordinates: Coordinates): string {}
+  private buildWeatherQuery(coordinates: Coordinates): string {
+    
+  }
   // TODO: Create fetchAndDestructureLocationData method
   // private async fetchAndDestructureLocationData() {}
   // TODO: Create fetchWeatherData method
