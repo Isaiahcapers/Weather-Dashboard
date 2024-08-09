@@ -1,13 +1,40 @@
 import dotenv from 'dotenv';
 dotenv.config();
-
+const API_KEY = process.env.API_KEY;
 // TODO: Define an interface for the Coordinates object
+interface Coordinates {
+// properties
 
+// methods
+}
 // TODO: Define a class for the Weather object
+class Weather {
+  date: number;
+  icon: string;
+  temp: number;
+  wind: number;
+  humidty:number;
 
+  constructor (
+    date: number,
+    icon: string,
+    temp: number,
+    wind: number,
+    humidty:number, 
+  ) {
+    this.date = date;
+    this.icon = icon;
+    this.temp = temp;
+    this.wind = wind;
+    this.humidty = humidty;
+  }
+}
 // TODO: Complete the WeatherService class
 class WeatherService {
   // TODO: Define the baseURL, API key, and city name properties
+  baseURL: string = "https://api.openweathermap.org/data/2.5/forecast";
+  apiKey: number = API_KEY;
+  cityName: string = "";
   // TODO: Create fetchLocationData method
   // private async fetchLocationData(query: string) {}
   // TODO: Create destructureLocationData method
